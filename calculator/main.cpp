@@ -7,12 +7,14 @@ using namespace std;
 using namespace calculator;
 int main() {
     for (string infixExpression; getline(cin, infixExpression); ) {
+        cout << "Original infixExpression: " << infixExpression << endl;
         while (expressionPretreatment(infixExpression));
-        cout << infixExpression << endl;
+        cout << "Modified infixExpression: " << infixExpression << endl;
         string postfixExpression = infixToPostfix(infixExpression);
-        cout << postfixExpression << endl;
+        cout << "postfixExpression: " << postfixExpression << endl;
         double result = calculatePostfixExpression(postfixExpression);
-        cout << result << endl;
+        cout << "calculation result: " << result << endl;
+        cout << "----------------------------------------" << endl;
     }
     return 0;
 }

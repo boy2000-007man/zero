@@ -27,7 +27,7 @@ static double calculateNumber(const double &a, const std::string &op, const doub
 double calculator::calculatePostfixExpression(const string &postfixExpression) {
     stringstream ss(postfixExpression);
     vector<double> numbers;
-    for (string parament; getline(ss, parament, ':'); )
+    for (string parament; getline(ss, parament, ' '); )
         if (isOperator(parament)) {
             numbers[numbers.size() - 2] = calculateNumber(numbers[numbers.size() - 2], parament, numbers[numbers.size() - 1]);
             numbers.pop_back();

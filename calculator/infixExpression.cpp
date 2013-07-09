@@ -22,13 +22,13 @@ string calculator::infixToPostfix(const string &infixExpression) {
                 break;
             default:
                 if (parament != "")
-                    postfixExpression += parament + ':';
+                    postfixExpression += parament + ' ';
                 parament = "";
                 switch (infixExpression[i]) {
                     case '+':
                     case '-':
                         while (!operators.empty() && operators.back() != "(") {
-                            postfixExpression += operators.back() + ':';
+                            postfixExpression += operators.back() + ' ';
                             operators.pop_back();
                         }
                         operators.push_back(string("") + infixExpression[i]);
@@ -39,21 +39,21 @@ string calculator::infixToPostfix(const string &infixExpression) {
                     case '*':
                     case '/':
                         while (!operators.empty() && operators.back() != "(" && operators.back() != "+" && operators.back() != "-") {
-                            postfixExpression += operators.back() + ':';
+                            postfixExpression += operators.back() + ' ';
                             operators.pop_back();
                         }
                         operators.push_back(string("") + infixExpression[i]);
                         break;
                     case ')':
                         while (operators.back() != "(") {
-                            postfixExpression += operators.back() + ':';
+                            postfixExpression += operators.back() + ' ';
                             operators.pop_back();
                         }
                         operators.pop_back();
                         break;
                     case '\0':
                         while (!operators.empty()) {
-                            postfixExpression += operators.back() + ':';
+                            postfixExpression += operators.back() + ' ';
                             operators.pop_back();
                         }
                         return postfixExpression;

@@ -35,20 +35,20 @@ bool calculator::expressionPretreatment(string &expression) {
                 }
                 break;
         }
+    result[0] = ' ';
     result = cleanBlanks(result);
-    int deleteNum = 0;
+    int rightNum = 0;
     for (int i = 0; result[i] != '\0'; i++)
         switch (result[i]) {
             case '(':
-                deleteNum++;
+                rightNum++;
                 break;
             case ')':
-                deleteNum--;
+                rightNum--;
                 break;
         }
-    while (deleteNum > 0)
-        result[--deleteNum] = ' ';
-    result = cleanBlanks(result);
+    for (int i = 0; i < rightNum; i++)
+        result += ')';
     bool change = result != expression;
     expression = result;
     return change;
