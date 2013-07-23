@@ -1,4 +1,3 @@
-# change name to ~/.conkyrc to use it as default
 # Conky settings #
 background yes
 update_interval 1
@@ -48,7 +47,7 @@ temperature_unit celsius
 default_color FFFFFF
 
 # Lua Load  #
-lua_load /usr/share/conkycolors/scripts/conkyClock_rings.lua
+lua_load ~/.conky/conkyClock_rings.lua
 lua_draw_hook_pre conkyClock_rings
 
 TEXT
