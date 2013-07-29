@@ -92,6 +92,8 @@ inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 inoremap < <><ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
