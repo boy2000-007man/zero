@@ -91,7 +91,7 @@ inoremap <C-U> <C-G>u<C-U>
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
-inoremap < <><ESC>i
+"inoremap < <><ESC>i
 inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
 
