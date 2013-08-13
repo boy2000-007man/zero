@@ -7,6 +7,8 @@
 namespace sdk {
 struct Location {
     int x, y;
+    Location(const int &tx, const int &ty) : x(tx), y(ty) {
+    }
     friend bool operator< (const Location &l1, const Location &l2) {
         if (l1.x != l2.x)
             return l1.x < l2.x;
@@ -15,7 +17,13 @@ struct Location {
     friend bool operator> (const Location &l1, const Location &l2) {
         return l2 < l1;
     }
-};  // struct Location
+    friend bool operator== (const Location &l1, const Location &l2) {
+        return l1.x == l2.x && l1.y == l2.y;
+    }
+    friend bool operator!= (const Location &l1, const Location &l2) {
+        return !(l1 == l2);
+    }
+} home(0, 0);   // struct Location
 int distance(const Location &l1, const Location &l2) {
     return abs(l1.x - l2.x) + abs(l1.y - l2.y);
 }
@@ -23,7 +31,7 @@ bool cmp(const Location &l1, const Location &l2) {
     return l1 < l2;
 }
 struct Food : public Location {
-    int num;
+    int number;
 };  // struct Food
 struct Ant : public Location {
     std::vector<Food> foods;
@@ -32,9 +40,19 @@ static int dx[] = {-1, -1, -1,  0, 0,  1, 1, 1},
            dy[] = {-1,  0,  1, -1, 1, -1, 0, 1};
 static int num = sizeof(dx) / siezof(*dx);
 template <class T>
-void merge(std::vector<T> &target, std::vector<T> source) {
+void merge(std::vector<T> &target, const std::vector<T> &source) {
     std::vector<T> temp;
-    for (int i = 0, j = 0; )
+    int i, j;
+    for (i = 0, j = 0; i < target.size() && j < source.size(); ) {
+        if (target[i] < source[j])
+            temp.push_back(target[i++]);
+        else if (target[i] > source[j])
+            temp.push_back(source[j++]);
+        else {  // asset target and source have been sorted and have no repeat
+            temp.push_back(target[i++]);
+            j++;
+        }
+    }
 }
 class Map {
     int x_max, y_max;
