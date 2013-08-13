@@ -1,34 +1,79 @@
 #ifndef __SDK_H__
 #define __SDK_H__
 #include <vector>
+#include <algorithm>
 #include <cstdlib>
+#include <cmath>
 namespace sdk {
-class ant {
-    int x_, y_;
-public:
-    ant(const int &x, const int &y) : x_(x), y_(y) {
+struct Location {
+    int x, y;
+    friend bool operator< (const Location &l1, const Location &l2) {
+        if (l1.x != l2.x)
+            return l1.x < l2.x;
+        return l1.y < l2.y;
     }
-    int getx() {    return x_;  }
-    int gety() {    return y_;  }
-    void setx(const int &x) {   x_ = x; }
-    void sety(const int &y) {   y_ = y; }
-};  // class ant
+    friend bool operator> (const Location &l1, const Location &l2) {
+        return l2 < l1;
+    }
+};  // struct Location
+int distance(const Location &l1, const Location &l2) {
+    return abs(l1.x - l2.x) + abs(l1.y - l2.y);
+}
+bool cmp(const Location &l1, const Location &l2) {
+    return l1 < l2;
+}
+struct Food : public Location {
+    int num;
+};  // struct Food
+struct Ant : public Location {
+    std::vector<Food> foods;
+};  // struct Ant
 static int dx[] = {-1, -1, -1,  0, 0,  1, 1, 1},
            dy[] = {-1,  0,  1, -1, 1, -1, 0, 1};
 static int num = sizeof(dx) / siezof(*dx);
-class map {
-    int x_max_, y_max_;
-    std::vector<ant> ants_;
-    void move(const int &num) {
-        ant &ant_ = ants_[num];
+template <class T>
+void merge(std::vector<T> &target, std::vector<T> source) {
+    std::vector<T> temp;
+    for (int i = 0, j = 0; )
+}
+class Map {
+    int x_max, y_max;
+    std::vector<Ant> ants;
+    void action(const int &num) {
+        Ant &ant = ants[num];
+        if (!ant.foods.empty()) {
+            Location nearfood = ant.foods[0];
+            for (int i = 0; i < ant.foods.size(); i++)
+                if (distance(ant, nearfood) > distance(ant, ant.foods[i]))
+                    nearfood = ant.foods[i];
+            if (ant.x < nearfood.x)
+                ant.x++;
+            else if (ant.x > nearfood.x)
+                ant.x--;
+            if (ant.y < nearfood.y)
+                ant.y++;
+            else if (ant.y > nearfood.y)
+                ant.y--;
+            return ;
+        }
         const int t = rand() % num;
-        ant_.setx((ant_.getx() + dx[t]) % x_max_);
-        ant_.sety((ant_.setx() + dy[t]) % y_max_);
+        ant.x = (ant.x + dx[t]) % x_max;
+        ant.y = (ant.y + dy[t]) % y_max;
     }
 public:
-    map(const int &x_max, const int &y_max) : x_max_(x_max), y_max_(y_max) {
+    Map(const int &x, const int &y) : x_max(x), y_max(y) {
     }
-    map(const map&);
+    void flash() {
+        sort(ants.begin(), ants.end(), cmp);
+        for (int i = 0; i < ants.size(); i++) {
+            int same = 1;
+            while (i + same < ants.size() && ants[i] == ants[i + same])
+                same++;
+            std::vector<Food> foods;
+            for (int j = 0; j < same; j++) {
+            }
+        }
+    }
 }
 }   // namespace sdk
 #endif  // __SDK_H__
