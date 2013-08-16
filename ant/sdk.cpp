@@ -132,6 +132,7 @@ std::ostream& operator<< (std::ostream &out, const Map &map) {
             out << tmap[i][j];
         out << std::endl;
     }
+    out << "end";
 }
 void Map::addant(const Ant &ant) {
     ants.push_back(ant);
