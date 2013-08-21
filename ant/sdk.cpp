@@ -59,6 +59,7 @@ void Ant::action(const Map &map) {
 static int dx[] = {-1, -1, -1,  0, 0,  1, 1, 1},
            dy[] = {-1,  0,  1, -1, 1, -1, 0, 1};
 static int num = sizeof(dx) / sizeof(*dx);
+static const int antValue = 10;
 template <class T>
 static void merge(std::vector<T> &target, const std::vector<T> &source) {
     std::vector<T> temp;
@@ -114,6 +115,10 @@ void Map::flash() {
             ant.food = 0;
         }
         ant.action(*this);
+    }
+    while (home.food >= antValue) {
+        home.food -= antValue;
+        ants.push_back(Ant(home.x, home.y));
     }
 }
 std::ostream& operator<< (std::ostream &out, const Map &map) {
