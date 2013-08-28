@@ -109,6 +109,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
+alias qmake='qmake-qt4'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
