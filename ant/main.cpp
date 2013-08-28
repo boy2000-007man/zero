@@ -38,7 +38,7 @@ string long_to_short(const option long_opts[], const int &opts_number) {
                 short_opts += ":";
                 break;
             case optional_argument:
-                short_opts += "::";
+                short_opts += ":";
                 break;
         }
     }
@@ -60,18 +60,33 @@ int main(int argc, char *argv[]) {
                 return 0;
                 break;
             case 'w':
-                width = atoi(optarg);
+                if ((width = atoi(optarg)) <= 0) {
+                    cout << argv[0] << ": option requires a legal argument -- '" << (char)c << "'" << endl;
+                    return 0;
+                }
                 break;
             case 'h':
-                height = atoi(optarg);
+                if ((height = atoi(optarg)) <= 0) {
+                    cout << argv[0] << ": option requires a legal argument -- '" << (char)c << "'" << endl;
+                    return 0;
+                }
                 break;
             case 'a':
-                ant = atoi(optarg);
+                if ((ant = atoi(optarg)) <= 0) {
+                    cout << argv[0] << ": option requires a legal argument -- '" << (char)c << "'" << endl;
+                    return 0;
+                }
                 break;
             case 'f':
-                food = atoi(optarg);
+                if ((food = atoi(optarg)) <= 0) {
+                    cout << argv[0] << ": option requires a legal argument -- '" << (char)c << "'" << endl;
+                    return 0;
+                }
                 break;
-            /*case '?': // getopt() has it's own error process
+            case '?':
+                return 1;
+                break;
+                /* getopt() has it's own error process
                 if (optopt == 'w' || optopt == 'h' || optopt == 'a' || optopt == 'f')
                     cout << "Error: option -" << (char)optopt << " requires an argument" << endl;
                 else if (isprint(optopt))
@@ -81,14 +96,7 @@ int main(int argc, char *argv[]) {
                 return 1;*/
         }
     }
-    if (width <= 0 || height <= 0) {
-        cerr << argv[0] << ": map's width or height is not allowed." << endl;
-        return 1;
-    } else if (ant <= 0 || food <= 0) {
-        cerr << argv[0] << ": ant's or food's number is not allowed." << endl;
-        return 1;
-    }
-
+/*
     srand(time(NULL));
     Map map(width, height, Home(0, 0));
     for (int i = 0; i < ant; i++)
@@ -98,6 +106,6 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < 100; i++) {
         cout << map << endl;
         map.flash();
-    }
+    }*/
     return 0;
 }
