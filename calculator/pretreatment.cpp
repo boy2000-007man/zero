@@ -34,6 +34,21 @@ bool calculator::expressionPretreatment(string &expression) {
                         break;
                 }
                 break;
+            case '*':
+            case '/':
+                switch (result[i]) {
+                    case '+':
+                    case '-':
+                        if ('0' > result[i + 1] || '9' < result[i + 1])
+                            break;
+                        result.insert(i, "(0");
+                        i += 3;
+                        while (result[i] != '\0' && '0' <= result[i] && result[i] <= '9')
+                            i++;
+                        result.insert(i, ")");
+                        break;
+                }
+                break;
         }
     result[0] = ' ';
     result = cleanBlanks(result);
