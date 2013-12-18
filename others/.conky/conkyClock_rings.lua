@@ -187,7 +187,7 @@ settings_table = {
     {
         name='exec cat ~/.conky/tunet.flux',
         arg='',
-        max=20000,
+        max=20,
         bg_colour=0xffffff,
         bg_alpha=0.2,
         fg_colour=0xFF6600,

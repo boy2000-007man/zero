@@ -109,7 +109,6 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias qmake='qmake-qt4'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -122,6 +121,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
+#alias qmake='qmake-qt4'
+alias jwine='env LANG=ja_JP.UTF-8 wine'
+#alias test='/usr/bin/time -f "time:\t%es\nmemory:\t%MKB\n"'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

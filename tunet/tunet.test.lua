@@ -1,1 +1,0 @@
-/home/zero/foobar/zero/tunet.test.lua
