@@ -1,10 +1,12 @@
 [Desktop Entry]
-Name=Vim Text Editor
+Name=Vim
+GenericName[zh_CN]=Text Editor
 Comment=Edit text files
-Exec=vim %F
-Terminal=true
+Comment[zh_CN]=编辑文本文件
+Icon=vim
 Type=Application
-Icon=terminal
-Categories=Utility;TextEditor;
+Exec=vim %f
+Terminal=true
+Categories=Utility;TextEditor;Development;
 StartupNotify=true
 MimeType=text/plain;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Thunder
+Comment=Download files
+Comment[zh_CN]=下载文件
+Icon=/mnt/Zero_Software/Software/Thunder/Program/logo.png
+Type=Application
+Exec=wine /mnt/Zero_Software/Software/Thunder/Program/Thunder.exe
+Terminal=false
+StartupNotify=true
